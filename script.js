@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       diary_logout_btn: "Uitloggen 🔓",
       diary_login_title: "Inloggen voor Dagboek",
       diary_login_submit: "Inloggen",
-      diary_login_error: "Onjuist wachtwoord!",
+      diary_login_error: "Onjuiste gebruikersnaam of wachtwoord!",
       diary_new_entry_title: "Nieuw Dagboekbericht",
       diary_field_title: "Titel",
       diary_field_text: "Verhaal",
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
       diary_logout_btn: "Log Out 🔓",
       diary_login_title: "Login to Diary",
       diary_login_submit: "Login",
-      diary_login_error: "Incorrect password!",
+      diary_login_error: "Incorrect username or password!",
       diary_new_entry_title: "New Diary Entry",
       diary_field_title: "Title",
       diary_field_text: "Story",
@@ -188,11 +188,13 @@ document.addEventListener('DOMContentLoaded', () => {
     nl: {
       guestbook_name_placeholder: "Jouw Naam",
       guestbook_message_placeholder: "Typ hier je zonnige bericht...",
+      diary_username_placeholder: "Gebruikersnaam...",
       diary_password_placeholder: "Wachtwoord invoeren..."
     },
     en: {
       guestbook_name_placeholder: "Your Name",
       guestbook_message_placeholder: "Type your sunshine message here...",
+      diary_username_placeholder: "Enter username...",
       diary_password_placeholder: "Enter password..."
     }
   };
@@ -787,7 +789,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const diaryPreviewImg = document.getElementById('diary-preview-img');
   const diaryPreviewRemove = document.getElementById('diary-preview-remove');
   
-  let diaryLoggedIn = localStorage.getItem('norah_diary_logged_in') === 'true';
+  let diaryLoggedIn = false; // Always logged out by default when page is loaded
   let uploadedFileBase64 = '';
 
   // Initial Prepopulated Diary Entries
@@ -897,7 +899,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (diaryLogoutBtn) {
     diaryLogoutBtn.addEventListener('click', () => {
       diaryLoggedIn = false;
-      localStorage.setItem('norah_diary_logged_in', 'false');
       updateDiaryAuthState();
     });
   }
@@ -917,12 +918,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (diaryLoginForm) {
     diaryLoginForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const userInput = document.getElementById('diary-username');
       const passInput = document.getElementById('diary-password');
-      const password = passInput.value.trim().toLowerCase();
       
-      if (password === 'norah' || password === 'rob') {
+      const username = userInput.value.trim().toLowerCase();
+      const password = passInput.value.trim();
+      
+      // Norah's credentials: username "norah" and password "sunshine"
+      // Also allow "rob" and password "sunshine"
+      if ((username === 'norah' && password === 'sunshine') || (username === 'rob' && password === 'sunshine')) {
         diaryLoggedIn = true;
-        localStorage.setItem('norah_diary_logged_in', 'true');
+        userInput.value = '';
         passInput.value = '';
         diaryLoginModal.classList.remove('show');
         updateDiaryAuthState();
