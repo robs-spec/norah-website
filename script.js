@@ -75,7 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
       guestbook_btn_submit: "Stuur Zonnestraal ☀️",
       guestbook_recent_title: "Recente Berichten",
       guestbook_empty: "Nog geen berichten. Wees de eerste om zonnestralen te sturen! ☀️",
-      footer_text: "&copy; 2026 Norah's Zonnige Wereld. Gemaakt met ❤️ voor Norah en Luna."
+      footer_text: "&copy; 2026 Norah's Zonnige Wereld. Gemaakt met ❤️ voor Norah en Luna.",
+      
+      nav_diary: "Dagboek",
+      diary_title: "Norah's Dagboek 📖",
+      diary_subtitle: "Blijf op de hoogte van mijn avonturen!",
+      diary_login_btn: "Schrijven ✍️",
+      diary_logout_btn: "Uitloggen 🔓",
+      diary_login_title: "Inloggen voor Dagboek",
+      diary_login_submit: "Inloggen",
+      diary_login_error: "Onjuist wachtwoord!",
+      diary_new_entry_title: "Nieuw Dagboekbericht",
+      diary_field_title: "Titel",
+      diary_field_text: "Verhaal",
+      diary_field_image: "Kies een foto",
+      diary_field_submit: "Plaatsen 📝",
+      diary_empty: "Nog geen dagboekberichten."
     },
     en: {
       hero_badge: "Welcome to my world!",
@@ -150,18 +165,35 @@ document.addEventListener('DOMContentLoaded', () => {
       guestbook_btn_submit: "Send Sunshine ☀️",
       guestbook_recent_title: "Recent Messages",
       guestbook_empty: "No messages yet. Be the first to send some sunshine! ☀️",
-      footer_text: "&copy; 2026 Norah's Sunshine World. Created with ❤️ for Norah and Luna."
+      footer_text: "&copy; 2026 Norah's Sunshine World. Created with ❤️ for Norah and Luna.",
+      
+      nav_diary: "Diary",
+      diary_title: "Norah's Diary 📖",
+      diary_subtitle: "Keep up with my sunny adventures!",
+      diary_login_btn: "Write ✍️",
+      diary_logout_btn: "Log Out 🔓",
+      diary_login_title: "Login to Diary",
+      diary_login_submit: "Login",
+      diary_login_error: "Incorrect password!",
+      diary_new_entry_title: "New Diary Entry",
+      diary_field_title: "Title",
+      diary_field_text: "Story",
+      diary_field_image: "Choose a photo",
+      diary_field_submit: "Publish 📝",
+      diary_empty: "No diary entries yet."
     }
   };
 
   const placeholders = {
     nl: {
       guestbook_name_placeholder: "Jouw Naam",
-      guestbook_message_placeholder: "Typ hier je zonnige bericht..."
+      guestbook_message_placeholder: "Typ hier je zonnige bericht...",
+      diary_password_placeholder: "Wachtwoord invoeren..."
     },
     en: {
       guestbook_name_placeholder: "Your Name",
-      guestbook_message_placeholder: "Type your sunshine message here..."
+      guestbook_message_placeholder: "Type your sunshine message here...",
+      diary_password_placeholder: "Enter password..."
     }
   };
 
@@ -202,6 +234,14 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMessages();
     // Refresh user drawing captions
     renderGalleryDrawings();
+    
+    // Refresh diary feed and auth controls
+    if (typeof renderDiary === 'function') {
+      renderDiary();
+    }
+    if (typeof updateDiaryAuthState === 'function') {
+      updateDiaryAuthState();
+    }
   }
 
   langBtns.forEach(btn => {
@@ -731,6 +771,237 @@ document.addEventListener('DOMContentLoaded', () => {
     visitorNameInput.value = '';
     visitorMessageInput.value = '';
   });
+  /* --- 8. Norah's Diary with Login & LocalStorage --- */
+  const diaryLoginBtn = document.getElementById('diary-login-btn');
+  const diaryLogoutBtn = document.getElementById('diary-logout-btn');
+  const diaryUploadPanel = document.getElementById('diary-upload-panel');
+  const diaryForm = document.getElementById('diary-form');
+  const diaryGrid = document.getElementById('diary-grid');
+  
+  const diaryLoginModal = document.getElementById('diary-login-modal');
+  const diaryLoginForm = document.getElementById('diary-login-form');
+  const closeDiaryLogin = document.getElementById('close-diary-login');
+  
+  const diaryInputFile = document.getElementById('diary-input-file');
+  const diaryFilePreview = document.getElementById('diary-file-preview');
+  const diaryPreviewImg = document.getElementById('diary-preview-img');
+  const diaryPreviewRemove = document.getElementById('diary-preview-remove');
+  
+  let diaryLoggedIn = localStorage.getItem('norah_diary_logged_in') === 'true';
+  let uploadedFileBase64 = '';
+
+  // Initial Prepopulated Diary Entries
+  const defaultDiaryEntries = [
+    {
+      id: 1,
+      date_nl: "24 mei 2026",
+      date_en: "May 24, 2026",
+      title_nl: "Eerste paardrijles van de week! 🐎",
+      title_en: "First horse riding lesson of the week! 🐎",
+      text_nl: "Vandaag mocht ik weer rijden! We hebben gedraafd in de bak en ik mocht mijn paardenvriend naderhand verzorgen en lekkere wortels geven.",
+      text_en: "Today I got to ride again! We trotted in the arena and I got to groom my horse friend afterwards and feed him some yummy carrots.",
+      image: "content/norah_horse_riding.jpg"
+    },
+    {
+      id: 2,
+      date_nl: "20 mei 2026",
+      date_en: "May 20, 2026",
+      title_nl: "Een geweldige dag op het water! ⛵",
+      title_en: "An amazing day on the water! ⛵",
+      text_nl: "Vandaag zijn we wezen zeilen. Er was een heerlijke bries en de zon scheen volop! Luna bleef op de kade wachten en blafte toen we weer aanlegden.",
+      text_en: "Today we went sailing. There was a lovely breeze and the sun was shining bright! Luna waited on the dock and barked happily when we moored.",
+      image: "content/norah_sailing_sunny.jpg"
+    }
+  ];
+
+  function getDiaryEntries() {
+    return JSON.parse(localStorage.getItem('norah_diary_entries') || '[]');
+  }
+
+  function saveDiaryEntries(entries) {
+    localStorage.setItem('norah_diary_entries', JSON.stringify(entries));
+  }
+
+  function renderDiary() {
+    if (!diaryGrid) return;
+    diaryGrid.innerHTML = '';
+    const userEntries = getDiaryEntries();
+    
+    // Combine custom user entries and default entries
+    const allEntries = [...userEntries];
+    
+    defaultDiaryEntries.forEach(defEntry => {
+      if (!userEntries.some(e => e.isDefaultShadow && e.defaultId === defEntry.id)) {
+        allEntries.push(defEntry);
+      }
+    });
+
+    allEntries.sort((a, b) => b.id - a.id);
+
+    if (allEntries.length === 0) {
+      diaryGrid.innerHTML = `<div class="diary-empty"><p data-translate="diary_empty">${translations[currentLang]['diary_empty']}</p></div>`;
+      return;
+    }
+
+    allEntries.forEach(entry => {
+      const card = document.createElement('div');
+      card.classList.add('diary-card');
+      
+      const date = entry.date ? entry.date : (currentLang === 'nl' ? entry.date_nl : entry.date_en);
+      const title = entry.title ? entry.title : (currentLang === 'nl' ? entry.title_nl : entry.title_en);
+      const text = entry.text ? entry.text : (currentLang === 'nl' ? entry.text_nl : entry.text_en);
+      
+      card.innerHTML = `
+        <div class="diary-img-container">
+          <img src="${entry.image}" alt="${title}" loading="lazy">
+        </div>
+        <div class="diary-body">
+          <div class="diary-date">${date}</div>
+          <h4 class="diary-card-title">${title}</h4>
+          <p class="diary-text">${text}</p>
+        </div>
+      `;
+      diaryGrid.appendChild(card);
+    });
+  }
+
+  function updateDiaryAuthState() {
+    if (!diaryLoginBtn || !diaryLogoutBtn || !diaryUploadPanel) return;
+    if (diaryLoggedIn) {
+      diaryLogoutBtn.classList.remove('hidden');
+      diaryLoginBtn.innerHTML = currentLang === 'nl' ? "Schrijf Bericht ✍️" : "Write Entry ✍️";
+      diaryLoginBtn.classList.add('btn-secondary');
+      diaryLoginBtn.classList.remove('btn-primary');
+    } else {
+      diaryLogoutBtn.classList.add('hidden');
+      diaryLoginBtn.innerHTML = currentLang === 'nl' ? "Schrijven ✍️" : "Write ✍️";
+      diaryLoginBtn.classList.add('btn-primary');
+      diaryLoginBtn.classList.remove('btn-secondary');
+      diaryUploadPanel.classList.add('hidden');
+    }
+  }
+
+  if (diaryLoginBtn) {
+    diaryLoginBtn.addEventListener('click', () => {
+      if (diaryLoggedIn) {
+        diaryUploadPanel.classList.toggle('hidden');
+        if (!diaryUploadPanel.classList.contains('hidden')) {
+          diaryUploadPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        diaryLoginModal.classList.add('show');
+      }
+    });
+  }
+
+  if (diaryLogoutBtn) {
+    diaryLogoutBtn.addEventListener('click', () => {
+      diaryLoggedIn = false;
+      localStorage.setItem('norah_diary_logged_in', 'false');
+      updateDiaryAuthState();
+    });
+  }
+
+  if (closeDiaryLogin) {
+    closeDiaryLogin.addEventListener('click', () => {
+      diaryLoginModal.classList.remove('show');
+    });
+  }
+
+  window.addEventListener('click', (e) => {
+    if (e.target === diaryLoginModal) {
+      diaryLoginModal.classList.remove('show');
+    }
+  });
+
+  if (diaryLoginForm) {
+    diaryLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const passInput = document.getElementById('diary-password');
+      const password = passInput.value.trim().toLowerCase();
+      
+      if (password === 'norah' || password === 'rob') {
+        diaryLoggedIn = true;
+        localStorage.setItem('norah_diary_logged_in', 'true');
+        passInput.value = '';
+        diaryLoginModal.classList.remove('show');
+        updateDiaryAuthState();
+        diaryUploadPanel.classList.remove('hidden');
+        diaryUploadPanel.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        alert(translations[currentLang]['diary_login_error']);
+      }
+    });
+  }
+
+  if (diaryInputFile) {
+    diaryInputFile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          uploadedFileBase64 = event.target.result;
+          diaryPreviewImg.src = uploadedFileBase64;
+          diaryFilePreview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  if (diaryPreviewRemove) {
+    diaryPreviewRemove.addEventListener('click', () => {
+      uploadedFileBase64 = '';
+      diaryInputFile.value = '';
+      diaryFilePreview.classList.add('hidden');
+      diaryPreviewImg.src = '';
+    });
+  }
+
+  if (diaryForm) {
+    diaryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const titleVal = document.getElementById('diary-input-title').value.trim();
+      const textVal = document.getElementById('diary-input-text').value.trim();
+      
+      if (!uploadedFileBase64) {
+        alert(currentLang === 'nl' ? "Kies eerst een foto!" : "Please choose a photo first!");
+        return;
+      }
+
+      const today = new Date();
+      const dateFormatted = today.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      const newEntry = {
+        id: Date.now(),
+        date: dateFormatted,
+        title: titleVal,
+        text: textVal,
+        image: uploadedFileBase64
+      };
+
+      const entries = getDiaryEntries();
+      entries.unshift(newEntry);
+      saveDiaryEntries(entries);
+      
+      renderDiary();
+      spawnSunbeamCascade();
+
+      diaryForm.reset();
+      uploadedFileBase64 = '';
+      diaryFilePreview.classList.add('hidden');
+      diaryPreviewImg.src = '';
+      diaryUploadPanel.classList.add('hidden');
+    });
+  }
+
+  // Initial rendering
+  renderDiary();
+  updateDiaryAuthState();
 
   // Initialize Language and Render
   applyLanguage(currentLang);
