@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Welkom in Norah's Zonnige Wereld! Een prachtige website over Norah's hobby's: paardrijden, zeilen, tekenen, zingen, dansen, skeeleren, karate en haar hond Luna.">
+  <title>Norah's Zonnige Wereld ☀️</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Floating Heart/Sun Container for Animations -->
+  <div id="animation-layer"></div>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="hero-sun-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge" data-translate="hero_badge">Welkom in mijn wereld!</div>
+      <h1 class="hero-title" data-translate="hero_title">Norah's Zonnige Wereld ☀️</h1>
+      <p class="hero-subtitle" data-translate="hero_subtitle">Brenger van glimlachen, dol op avontuur, en vriend van iedereen!</p>
+      <div class="hero-cta-group">
+        <a href="#about" class="btn btn-primary" data-translate="hero_cta_discover">Ontdek Meer</a>
+        <a href="#gallery" class="btn btn-secondary" data-translate="hero_cta_gallery">Fotogalerij</a>
+      </div>
+    </div>
+    
+    <!-- Floating elements in hero -->
+    <div class="floating-bubble bubble-1">🎨</div>
+    <div class="floating-bubble bubble-2">⛵</div>
+    <div class="floating-bubble bubble-3">💃</div>
+    <div class="floating-bubble bubble-4">🛼</div>
+    <div class="floating-bubble bubble-5">🐎</div>
+    <div class="floating-bubble bubble-6">🥋</div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">Norah ☀️</div>
+    <ul class="nav-links">
+      <li><a href="#home" data-translate="nav_home">Home</a></li>
+      <li><a href="#about" data-translate="nav_about">Over Norah</a></li>
+      <li><a href="#luna" data-translate="nav_luna">Luna de Hond</a></li>
+      <li><a href="#hobbies" data-translate="nav_hobbies">Mijn Hobby's</a></li>
+      <li><a href="#gallery" data-translate="nav_gallery">Galerij</a></li>
+      <li><a href="#guestbook" data-translate="nav_guestbook">Gastenboek</a></li>
+    </ul>
+    
+    <!-- Language Toggle Switch -->
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="nl">NL</button>
+      <span class="lang-separator">|</span>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrapper card-reveal">
+          <div class="polaroid-frame main-photo">
+            <img src="content/norah_window.jpg" alt="Norah sitting by the window" loading="lazy">
+            <div class="polaroid-caption" data-translate="about_frame_caption">Norah ☀️ Schijnt altijd!</div>
+          </div>
+        </div>
+        <div class="about-text-content">
+          <h2 class="section-title" data-translate="about_title">Het meisje met de zonnige persoonlijkheid</h2>
+          <p class="about-lead" data-translate="about_lead">Norah is een bundel van vreugde, gelach en eindeloze positieve energie. Waar ze ook gaat, brengt ze een zonnige persoonlijkheid die de hele kamer verlicht.</p>
+          <p data-translate="about_text">Ze gelooft dat elke dag een nieuw avontuur is dat wacht om te gebeuren. Of ze nu de natuur verkent, levendige meesterwerken tekent of knuffelt met haar favoriete hond, Norah verspreidt warmte en vriendelijkheid naar iedereen om haar heen.</p>
+          <div class="sunshine-stats">
+            <div class="stat-card">
+              <span class="stat-icon">☀️</span>
+              <h3>100%</h3>
+              <p data-translate="stat_sunshine_title">Zonnige Energie</p>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">❤️</span>
+              <h3 data-translate="stat_luna_inf">Oneindig</h3>
+              <p data-translate="stat_luna_title">Liefde voor Luna</p>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon">✨</span>
+              <h3 data-translate="stat_play_always">Altijd</h3>
+              <p data-translate="stat_play_title">Creëren & Spelen</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luna Section -->
+  <section class="section luna-section" id="luna">
+    <div class="container">
+      <div class="luna-grid">
+        <div class="luna-text-content">
+          <div class="badge-luna" data-translate="luna_badge">Norah's Beste Vriendin 🐾</div>
+          <h2 class="section-title" data-translate="luna_title">Luna de Hond</h2>
+          <p class="about-lead" data-translate="luna_lead">Als er één ding is waar Norah super-duper veel van houdt, dan is het haar geweldige, pluizige hond, <strong>Luna</strong>!</p>
+          <p data-translate="luna_text">Luna is een prachtige, pluizige Berner Sennenhond met een groot hart en een lief karakter. Ze staat altijd klaar voor een gezellige knuffel, een leuk spelletje in de tuin of een wandeling aan zee. Norah en Luna zijn onafscheidelijke partners in crime!</p>
+          
+          <div class="pet-interaction-card">
+            <h4 data-translate="luna_pet_title">Geef Luna wat liefde! 🐶</h4>
+            <p data-translate="luna_pet_desc">Klik op de knop hieronder om Luna te aaien en te zien hoeveel ze ervan houdt!</p>
+            <button id="pet-luna-btn" class="btn btn-primary pet-btn">
+              <span data-translate="luna_pet_btn">Aai Luna! ❤️</span>
+            </button>
+            <div class="pet-count-wrapper">
+              <span data-translate="luna_pet_tally_prefix">Luna is vandaag al</span>
+              <span id="pet-count">0</span>
+              <span data-translate="luna_pet_tally_suffix">keer geaaid!</span>
+            </div>
+          </div>
+        </div>
+        <div class="luna-image-wrapper card-reveal">
+          <div class="polaroid-frame luna-photo">
+            <img src="content/luna_and_norah.jpg" alt="Norah hugging Luna the dog" loading="lazy">
+            <div class="polaroid-caption" data-translate="luna_frame_caption">Beste vriendinnen voor altijd: Norah & Luna! 🐾</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobbies Section -->
+  <section class="section hobbies-section" id="hobbies">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title text-center" data-translate="hobbies_title">Mijn Favoriete Hobby's & Passies</h2>
+        <p class="section-subtitle text-center" data-translate="hobbies_subtitle">Van de golven van de zee tot het canvas van tekenen, dit is wat Norah's dagen zo spannend maakt!</p>
+      </div>
+
+      <div class="hobbies-grid">
+        
+        <!-- Hobby 1: Horse Riding (NOW NO. 1) -->
+        <div class="hobby-card card-reveal">
+          <div class="hobby-header horse-theme">
+            <span class="hobby-emoji">🐎</span>
+            <h3 data-translate="hobby_horse_title">Paardrijden</h3>
+          </div>
+          <div class="hobby-body">
+            <p data-translate="hobby_horse_desc">Norah houdt van paarden en de sensatie van paardrijden! De wind voelen terwijl ze door de arena draaft, leert haar kracht, geduld en hoe ze voor de paarden moet zorgen.</p>
+            <div class="hobby-highlight-img">
+              <img src="content/norah_horse_close.jpg" alt="Norah riding a horse" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Hobby 2: Sailing -->
+        <div class="hobby-card card-reveal">
+          <div class="hobby-header sailing-theme">
+            <span class="hobby-emoji">⛵</span>
+            <h3 data-translate="hobby_sailing_title">Zeilen</h3>
+          </div>
+          <div class="hobby-body">
+            <p data-translate="hobby_sailing_desc">Uitvaren op het open water is een van Norah's absolute favorieten! Ze houdt ervan de koele wind te voelen, de boot te besturen en met haar familie over de golven te varen.</p>
+            <div class="hobby-highlight-img">
+              <img src="content/norah_sailing_sunny.jpg" alt="Norah sailing on a sunny day" loading="lazy">
+            </div>
+            <!-- Custom wave decoration -->
+            <div class="wave-container">
+              <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                  <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax-waves">
+                  <use href="#gentle-wave" x="48" y="0" fill="rgba(78, 168, 222, 0.7)" />
+                  <use href="#gentle-wave" x="48" y="3" fill="rgba(78, 168, 222, 0.5)" />
+                  <use href="#gentle-wave" x="48" y="5" fill="rgba(78, 168, 222, 0.3)" />
+                  <use href="#gentle-wave" x="48" y="7" fill="#4EA8DE" />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hobby 3: Drawing -->
+        <div class="hobby-card card-reveal">
+          <div class="hobby-header drawing-theme">
+            <span class="hobby-emoji">🎨</span>
+            <h3 data-translate="hobby_drawing_title">Tekenen & Creativiteit</h3>
+          </div>
+          <div class="hobby-body">
+            <p data-translate="hobby_drawing_desc">Norah uit haar zonnige persoonlijkheid door middel van prachtige, kleurrijke tekeningen. Maak hier zelf een tekening op haar tekenbord!</p>
+            
+            <!-- Interactive Sketchpad -->
+            <div class="sketchpad-container">
+              <canvas id="sketchpad" width="280" height="150"></canvas>
+              <div class="sketchpad-controls">
+                <div class="colors">
+                  <button class="color-btn active" data-color="#FFD23F" style="background-color: #FFD23F;"></button>
+                  <button class="color-btn" data-color="#FF7A5A" style="background-color: #FF7A5A;"></button>
+                  <button class="color-btn" data-color="#4EA8DE" style="background-color: #4EA8DE;"></button>
+                  <button class="color-btn" data-color="#3D3A3A" style="background-color: #3D3A3A;"></button>
+                </div>
+                <div class="draw-actions">
+                  <button id="clear-sketchpad" class="btn-clear" data-translate="sketchpad_clear">Wissen 🧹</button>
+                  <button id="post-sketchpad" class="btn-post" data-translate="sketchpad_post">Deel Tekening 🖼️</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hobby 4: Singing & Dancing -->
+        <div class="hobby-card card-reveal">
+          <div class="hobby-header music-theme">
+            <span class="hobby-emoji">🎵</span>
+            <h3 data-translate="hobby_music_title">Zingen & Dansen</h3>
+          </div>
+          <div class="hobby-body">
+            <p data-translate="hobby_music_desc">Vrolijke liedjes zingen en dansen op blije ritmes is hoe Norah vreugde verspreidt! Ze staat altijd klaar om een show op te voeren en te swingen.</p>
+            
+            <!-- Interactive Music Visualizer Widget -->
+            <div class="music-widget">
+              <div class="music-title" data-translate="music_widget_title">Zonnige Melodie ☀️</div>
+              <div class="visualizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+              <button id="play-music-btn" class="btn-play">
+                <span class="play-icon">▶️</span> <span class="play-text" data-translate="music_widget_btn_start">Start Dansritme</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hobby 5: Rollerblading -->
+        <div class="hobby-card card-reveal">
+          <div class="hobby-header skating-theme">
+            <span class="hobby-emoji">🛼</span>
+            <h3 data-translate="hobby_skating_title">Skeeleren</h3>
+          </div>
+          <div class="hobby-body">
+            <p data-translate="hobby_skating_desc">Of het nu op inline skates of rolschaatsen is, skeeleren is puur plezier voor Norah! Ze geniet van glijden, nieuwe trucjes leren en rondracen met haar vrienden.</p>
+            <div class="skate-detail">
+              <div class="skate-spinner-wrapper">
+                <span class="skate-spinner">🛼🌀</span>
+                <p data-translate="skate_hover_text">Beweeg hierover om de skeelers te spinnen!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hobby 6: Karate -->
+        <div class="hobby-card card-reveal">
+          <div class="hobby-header karate-theme">
+            <span class="hobby-emoji">🥋</span>
+            <h3 data-translate="hobby_karate_title">Karate</h3>
+          </div>
+          <div class="hobby-body">
+            <p data-translate="hobby_karate_desc">Vastberadenheid, focus en kracht! Norah oefent karate, leert coole standen, stoten en weringen met haar witte band.</p>
+            <div class="hobby-highlight-img">
+              <img src="content/norah_karate_stance1.jpg" alt="Norah practicing Karate stance" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery Section -->
+  <section class="section gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title text-center" data-translate="gallery_title">Momenten van Geluk 📸</h2>
+        <p class="section-subtitle text-center" data-translate="gallery_subtitle">Een blik op Norah's echte avonturen: zeilen, paardrijden, karate en spelen met Luna.</p>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <div class="gallery-item" data-src="content/norah_window.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_window.jpg" alt="Norah sitting by the window" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_window">Zitten bij het raam ☀️</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/luna_and_norah.jpg">
+          <div class="polaroid-frame">
+            <img src="content/luna_and_norah.jpg" alt="Norah hugging Luna" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_luna">Knuffeltijd met Luna! 🐾</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/norah_posing.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_posing.jpg" alt="Norah posing outdoors" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_pose">Poseer eens! ✨</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/norah_sailing_cloudy.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_sailing_cloudy.jpg" alt="Norah sailing on a cloudy day" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_sailing_cloudy">Zeilen in de wind ⛵</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/norah_sailing_sunny.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_sailing_sunny.jpg" alt="Norah on the sailboat steering wheel" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_sailing_sunny">Kapitein Norah! ⛵</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/norah_horse_close.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_horse_close.jpg" alt="Norah close up on a horse" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_horse_close">Ontmoet mijn paardenvriend! 🐎</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/norah_horse_riding.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_horse_riding.jpg" alt="Norah horse riding in the arena" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_horse_riding">Paardrijles! 🐎</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/norah_karate_stance1.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_karate_stance1.jpg" alt="Norah in karate stance" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_karate1">Karate Focus! 🥋</div>
+          </div>
+        </div>
+        <div class="gallery-item" data-src="content/norah_karate_stance2.jpg">
+          <div class="polaroid-frame">
+            <img src="content/norah_karate_stance2.jpg" alt="Norah executing karate block" loading="lazy">
+            <div class="polaroid-caption" data-translate="caption_karate2">Karate Stand! 🥋</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal for Gallery -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Enlarged photo">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+
+  <!-- Guestbook Section -->
+  <section class="section guestbook-section" id="guestbook">
+    <div class="container">
+      <div class="guestbook-card">
+        <h2 class="section-title text-center" data-translate="guestbook_title">Zonnig Berichtenbord ☀️</h2>
+        <p class="section-subtitle text-center" data-translate="guestbook_subtitle">Laat een lief berichtje, een warme wens of een groet achter voor Norah!</p>
+        
+        <form id="guestbook-form" class="guestbook-form">
+          <div class="form-group">
+            <input type="text" id="visitor-name" class="form-control" placeholder="Jouw Naam" data-translate-placeholder="guestbook_name_placeholder" required>
+          </div>
+          <div class="form-group">
+            <textarea id="visitor-message" class="form-control" rows="4" placeholder="Typ hier je zonnige bericht..." data-translate-placeholder="guestbook_message_placeholder" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">
+            <span data-translate="guestbook_btn_submit">Stuur Zonnestraal ☀️</span>
+          </button>
+        </form>
+
+        <div class="messages-container">
+          <h3 data-translate="guestbook_recent_title">Recente Berichten</h3>
+          <div id="messages-list" class="messages-list">
+            <!-- Messages populated by JS -->
+            <div class="message-item empty-message">
+              <p data-translate="guestbook_empty">Nog geen berichten. Wees de eerste om zonnestralen te sturen! ☀️</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p data-translate="footer_text">&copy; 2026 Norah's Zonnige Wereld. Gemaakt met ❤️ voor Norah en Luna.</p>
+    </div>
+  </footer>
+
+  <!-- JS Script -->
+  <script src="script.js"></script>
+</body>
+</html>
